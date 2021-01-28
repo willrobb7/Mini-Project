@@ -1,0 +1,22 @@
+{
+  "name": "skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "academy.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willrobb7/Mini-Project.git"
+  },
+  "author": "Will Robinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willrobb7/Mini-Project/issues"
+  },
+  "homepage": "https://github.com/willrobb7/Mini-Project#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}

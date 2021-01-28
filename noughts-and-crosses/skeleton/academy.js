@@ -6,6 +6,7 @@ let turnNum =0
 let counter
 let board 
 let player = 0
+
 function takeTurn(row, column) {
     
     getBoard()
@@ -22,11 +23,10 @@ function takeTurn(row, column) {
         counter = "cross"
         player = 2
     }
-    
+
     console.log(`takeTurn: Turn number: ${turnNum}. This is player ${player}, using counter ${counter}`);
     
     board[row][column] = counter
-    
 
     console.log(board);
     return board
@@ -35,6 +35,7 @@ function takeTurn(row, column) {
 // Return either "noughts", "crosses" or "nobody" if the game is over.
 // Otherwise return null to continue playing.
 function checkWinner() {
+
     console.log("checkWinner was called");
     const winningBoard = "nought,nought,nought"
     const winningBoard1 = "cross,cross,cross"
@@ -47,27 +48,26 @@ function checkWinner() {
     }
 
     if ((horizontalBoard[0] !== null) && (horizontalBoard[0] === horizontalBoard[3]) && (horizontalBoard[3] === horizontalBoard [6])){
-        return win()
+        return win(player)
     }
     if ((horizontalBoard[1] !== null) && (horizontalBoard[1] === horizontalBoard[4]) && (horizontalBoard[4] === horizontalBoard [7])){
-        return win()
+        return win(player)
     }
     if ((horizontalBoard[2] !== null) && (horizontalBoard[2] === horizontalBoard[5]) && (horizontalBoard[5] === horizontalBoard [8])){
-        return win()
+        return win(player)
     }
     if ((horizontalBoard[0] !== null) && (horizontalBoard[0] === horizontalBoard[4]) && (horizontalBoard[4] === horizontalBoard [8])){
-        return win()
+        return win(player)
     }
     if ((horizontalBoard[2] !== null) && (horizontalBoard[2] === horizontalBoard[4]) && (horizontalBoard[4] === horizontalBoard [6])){
-        return win()
+        return win(player)
     }
-
 
     for(i=0;i<board.length;i++){
         let currentRow = board[i].toString()
         console.log(currentRow)
         if(currentRow === winningBoard || currentRow === winningBoard1 ){
-           return win()
+           return win(player)
         }
         // console.log("Not a winner")
     }
@@ -84,23 +84,27 @@ function checkWinner() {
         return "---"
     }
 }
-function win () {
+
+
+function win (player) {
     
-    // alert('WINNER')
-    console.log(player)
+    console.log(`win: Player = ${player}`)
+    let result = "not set"
+
     if (player === 1) {
-        resetGame()
-        return "noughts"
-    } 
-    if (player === 2){
-        console.log("________________________");
-        resetGame()
-        return "crosses"
+        result = "noughts"
+    } else if (player === 2){
+        result = "crosses"
     }
-    // resetGame()
+
+    resetGame()
+    return result
 }
+
+
 // Set the game state back to its original state to play another game.
 function resetGame() {
+    
     console.log("resetGame was called");
     board =  [[null, null, null], [null, null, null], [null, null, null]]
     checkWinner();
@@ -109,6 +113,7 @@ function resetGame() {
 // Return the current board state with either a "nought" or a "cross" in
 // each position. Put a null in a position that hasn't been played yet.
 function getBoard() {
+
     console.log("getBoard was called");
     console.log("getBoard: board = " + board)
     if (board == undefined){
@@ -116,3 +121,5 @@ function getBoard() {
     }
     return board
 }
+
+module.exports = { win, getBoard, resetGame, checkWinner, takeTurn }
